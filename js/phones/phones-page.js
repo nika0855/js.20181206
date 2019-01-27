@@ -1,8 +1,9 @@
 
-import PhoneCatalog from './components/phones-catalog.js';
-import PhoneViewer from './components/phones-viewer.js';
+import PhoneCatalog from './components/phone-catalog.js';
+import PhoneViewer from './components/phone-viewer.js';
 import ShoppingCart from './components/shopping-cart.js';
 import Filter from './components/filter.js';
+import PhoneServise from './phone-service.js';
 export default class PhonesPage {
     constructor({element}) {
         this._element = element;
@@ -10,19 +11,20 @@ export default class PhonesPage {
         this._render();
 
         this.catalog = new PhoneCatalog({
-          element: this.querySelector('[data-component = "phone-catalog"]')
+          element: this._element.querySelector('[data-component = "phone-catalog"]'),
+          phones: PhoneServise.getAll(),
         });
 
-        this.catalog = new PhoneCatalog({
-          element: this.querySelector('[data-component = "phone-catalog"]')
+        this.viewer = new PhoneViewer({
+          element: this._element.querySelector('[data-component = "phone-viewer"]')
         });
 
-        this.catalog = new PhoneCatalog({
-          element: this.querySelector('[data-component = "phone-catalog"]')
+        this.cart = new ShoppingCart({
+          element: this._element.querySelector('[data-component = "shopping-cart"]')
         });
 
-        this.catalog = new PhoneCatalog({
-          element: this.querySelector('[data-component = "phone-catalog"]')
+        this.filter = new Filter({
+          element: this._element.querySelector('[data-component = "filter"]')
         });
     }
     _render() {
