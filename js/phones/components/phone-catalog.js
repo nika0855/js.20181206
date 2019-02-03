@@ -1,8 +1,11 @@
+import Component from "../../component.js";
 
-export default class PhoneCatalog {
-    constructor({element, phones}) {
-        this._element = element;
+export default class PhoneCatalog extends Component {
+    constructor({element, phones, onPhoneSelected}) {
+      super({ element});
+       
         this._phones = phones;
+        this._onPhoneSelected = onPhoneSelected;
 
         this._render();
         
@@ -14,9 +17,12 @@ export default class PhoneCatalog {
           }
 
           const phoneElement = phoneLink.closest('[data-element="phone"]');
-          console.log('phone selected', phoneElement.dataset.phoneId);
+
+          this._onPhoneSelected(phoneElement.dataset.phoneId);          
         });
     }
+
+   
     _render() {
         this._element.innerHTML = `
         <ul class="phones">
